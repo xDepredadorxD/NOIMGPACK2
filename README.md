@@ -82,6 +82,18 @@ python main.py
 - **Navegación en cada área de trabajo**: barras de desplazamiento
 - **Navegación**: Botones "Página Anterior" y "Página Siguiente"
 
+## Atajos
+
+Teclas especiales para activar funciones rápidamente del menú de herramientas.
+
+- **Q**: Activar herramienta Mover
+- **W**: Activar herramienta Redimensionar
+- **R**: Activar herramienta Rotar
+- **D**: Activar herramienta Deformar
+- **T**: Restablecer imagen actual
+- **Ctrl+Z**: Deshacer última acción
+- **Ctrl+Y**: Rehacer última acción
+
 ## Estructura del proyecto
 
 - `main.py`: Punto de entrada de la aplicación
