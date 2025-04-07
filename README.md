@@ -1,4 +1,4 @@
-# Editor de Imágenes
+# Editor de Imágenes en Lote (protege tu privacidad)
 
 Un editor de imágenes en lote con interfaz gráfica desarrollado en Python que permite cargar, editar y guardar múltiples imágenes a una resolución directo al OUTPAINTING.
 
@@ -18,6 +18,23 @@ Guarda tu lote de imagnes sin subirlas a un servidor, protegiendo tu privacidad.
 - Resolución de salida personalizable
 - Navegación entre páginas
 - Deshacer/Rehacer (Ctrl+Z/Ctrl+Y)
+
+## Capturas de pantalla
+
+### Interfaz del editor
+![Interfaz principal](https://raw.githubusercontent.com/xDepredadorxD/NOIMGPACK2/refs/heads/main/ejemplos/Captura_de_pantalla_2025-04-07_131955.png)
+
+![Edición de imágenes](https://raw.githubusercontent.com/xDepredadorxD/NOIMGPACK2/refs/heads/main/ejemplos/Captura_de_pantalla_2025-04-07_132425.png)
+
+### Ejemplos de edición
+
+| Mover | Redimensionar |
+|-------|---------------|
+| ![Mover](https://raw.githubusercontent.com/xDepredadorxD/NOIMGPACK2/refs/heads/main/ejemplos/M.png) | ![Redimensionar](https://raw.githubusercontent.com/xDepredadorxD/NOIMGPACK2/refs/heads/main/ejemplos/W.png) |
+
+| Rotar | Deformar |
+|-------|----------|
+| ![Rotar](https://raw.githubusercontent.com/xDepredadorxD/NOIMGPACK2/refs/heads/main/ejemplos/R.png) | ![Deformar](https://raw.githubusercontent.com/xDepredadorxD/NOIMGPACK2/refs/heads/main/ejemplos/D.png) |
 
 ## Requisitos
 
