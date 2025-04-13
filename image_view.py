@@ -160,11 +160,11 @@ class ImageView(QGraphicsView):
 
         # Crear el rectángulo de selección
         self.selection_rect = QGraphicsRectItem(x, y, selection_width, selection_height)
-        self.selection_rect.setPen(QPen(QColor(255, 255, 0), 2, Qt.DashLine))
+        self.selection_rect.setPen(QPen(QColor(255, 255, 0), 3, Qt.SolidLine))  # Línea sólida más gruesa para mejor visibilidad
 
-        # Añadir el rectángulo de selección a la escena con un valor Z bajo para que esté debajo de la imagen
+        # Añadir el rectángulo de selección a la escena con un valor Z alto para que esté encima de la imagen
         self.scene.addItem(self.selection_rect)
-        self.selection_rect.setZValue(-1)  # Valor Z negativo para que esté debajo de la imagen
+        self.selection_rect.setZValue(3)  # Valor Z positivo para que esté encima de la imagen y los puntos de control
 
     def create_control_points(self):
         """Crea puntos de control para la deformación de la imagen."""
@@ -219,7 +219,7 @@ class ImageView(QGraphicsView):
             point.setData(0, name)
             point.setData(1, pos)  # Guardar la posición relativa en el pixmap
             self.scene.addItem(point)
-            point.setZValue(2)  # Valor Z positivo para que esté encima de la imagen
+            point.setZValue(4)  # Valor Z positivo para que esté encima de la imagen y del marco de selección
             self.control_points.append(point)
 
             # Guardar posición original y actual
@@ -575,7 +575,7 @@ class ImageView(QGraphicsView):
                 point.setBrush(QBrush(QColor(0, 255, 255, 100)))  # Color de relleno semitransparente
                 point.setData(0, name)
                 self.scene.addItem(point)
-                point.setZValue(2)  # Valor Z positivo para que esté encima de la imagen
+                point.setZValue(4)  # Valor Z positivo para que esté encima de la imagen y del marco de selección
                 self.control_points.append(point)
 
     def update_control_points_position(self):

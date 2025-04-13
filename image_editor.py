@@ -8,11 +8,12 @@ from PyQt5.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
                             QScrollArea, QSpinBox, QAction, QToolBar,
                             QStatusBar, QMessageBox, QTabWidget, QLineEdit,
                             QSlider, QStyleFactory, QMenu, QFrame, QDockWidget,
-                            QShortcut)
+                            QShortcut, QComboBox)
 from PyQt5.QtCore import Qt, QSize, pyqtSlot, QTimer, QPropertyAnimation, QEasingCurve, QPoint, QRect
 from PyQt5.QtGui import QIcon, QKeySequence, QTransform, QPalette, QColor, QFont
 from image_view import ImageView
 from PIL import Image
+from translations import Translator
 import math
 
 class ImageEditor(QMainWindow):
@@ -44,8 +45,11 @@ class ImageEditor(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        # Inicializar el traductor (por defecto en español)
+        self.translator = Translator('es')
+
         # Configuración de la ventana
-        self.setWindowTitle("Editor de Imágenes")
+        self.setWindowTitle(self.translator.get_text('window_title'))
         self.setMinimumSize(1200, 800)
 
         # Variables de estado
@@ -108,7 +112,7 @@ class ImageEditor(QMainWindow):
         self.reset_shortcut.activated.connect(self.reset_current_image)
 
         # Los atajos se mostrarán en la barra de estado después de inicializar la UI
-        self.shortcuts_message = "Atajos: Mover (Q), Redimensionar (W), Rotar (R), Deformar (D), Deshacer (Ctrl+Z), Rehacer (Ctrl+Y), Restablecer (T)"
+        self.shortcuts_message = self.translator.get_text('shortcuts')
 
     def init_ui(self):
         """Inicializa la interfaz de usuario."""
@@ -129,11 +133,11 @@ class ImageEditor(QMainWindow):
         # Botones de carga y guardado con estilo
         button_style = "QPushButton { font-size: 12pt; padding: 8px; border-radius: 8px; }"
 
-        load_btn = QPushButton("📁 Cargar Imágenes")
+        load_btn = QPushButton(self.translator.get_text('load_images'))
         load_btn.setStyleSheet(button_style)
         load_btn.clicked.connect(self.load_images)
 
-        save_btn = QPushButton("💾 Guardar Imágenes")
+        save_btn = QPushButton(self.translator.get_text('save_images'))
         save_btn.setStyleSheet(button_style)
         save_btn.clicked.connect(self.save_images)
 
@@ -144,7 +148,7 @@ class ImageEditor(QMainWindow):
         resolution_widget = QWidget()
         resolution_layout = QHBoxLayout(resolution_widget)
 
-        resolution_label = QLabel("🖼️ Resolución de salida:")
+        resolution_label = QLabel(self.translator.get_text('output_resolution'))
         resolution_label.setStyleSheet("font-size: 12pt;")
         resolution_layout.addWidget(resolution_label)
 
@@ -194,18 +198,33 @@ class ImageEditor(QMainWindow):
         # Botones de navegación con estilo
         nav_button_style = "QPushButton { font-size: 14pt; padding: 10px; border-radius: 8px; }"
 
-        prev_page_btn = QPushButton("◀️ Página Anterior")
+        prev_page_btn = QPushButton(self.translator.get_text('prev_page'))
         prev_page_btn.setStyleSheet(nav_button_style)
         prev_page_btn.setMinimumWidth(200)
         prev_page_btn.clicked.connect(self.prev_page)
 
         # Usar un emoji diferente para la flecha derecha
-        next_page_btn = QPushButton("Página Siguiente ▶️")
+        next_page_btn = QPushButton(self.translator.get_text('next_page'))
         next_page_btn.setStyleSheet(nav_button_style)
         next_page_btn.setMinimumWidth(200)
         next_page_btn.clicked.connect(self.next_page)
 
+        # Botones de idioma
+        language_style = "QPushButton { font-size: 12pt; padding: 8px; border-radius: 8px; }"
+
+        spanish_btn = QPushButton(self.translator.get_text('spanish'))
+        spanish_btn.setStyleSheet(language_style)
+        spanish_btn.setMinimumWidth(100)
+        spanish_btn.clicked.connect(lambda: self.change_language('es'))
+
+        english_btn = QPushButton(self.translator.get_text('english'))
+        english_btn.setStyleSheet(language_style)
+        english_btn.setMinimumWidth(100)
+        english_btn.clicked.connect(lambda: self.change_language('en'))
+
         # Se eliminaron los botones de zoom
+        bottom_layout.addWidget(spanish_btn)
+        bottom_layout.addWidget(english_btn)
         bottom_layout.addStretch()
         bottom_layout.addWidget(prev_page_btn)
         bottom_layout.addWidget(next_page_btn)
@@ -468,16 +487,16 @@ class ImageEditor(QMainWindow):
             return button
 
         # Botones de edición con atajos de teclado
-        move_btn = create_tool_button("Ⓜ️", "Mover (Q)", lambda: self.set_edit_mode(ImageView.MODE_MOVE))
+        move_btn = create_tool_button("Ⓜ️", self.translator.get_text('move'), lambda: self.set_edit_mode(ImageView.MODE_MOVE))
         toolbar_layout.addWidget(move_btn)
 
-        resize_btn = create_tool_button("🔛", "Redimensionar (W)", lambda: self.set_edit_mode(ImageView.MODE_RESIZE))
+        resize_btn = create_tool_button("🔛", self.translator.get_text('resize'), lambda: self.set_edit_mode(ImageView.MODE_RESIZE))
         toolbar_layout.addWidget(resize_btn)
 
-        rotate_btn = create_tool_button("🔄️", "Rotar (R)", lambda: self.set_edit_mode(ImageView.MODE_ROTATE))
+        rotate_btn = create_tool_button("🔄️", self.translator.get_text('rotate'), lambda: self.set_edit_mode(ImageView.MODE_ROTATE))
         toolbar_layout.addWidget(rotate_btn)
 
-        deform_btn = create_tool_button("🅳", "Deformar (D)", lambda: self.set_edit_mode(ImageView.MODE_DEFORM))
+        deform_btn = create_tool_button("🅳", self.translator.get_text('deform'), lambda: self.set_edit_mode(ImageView.MODE_DEFORM))
         toolbar_layout.addWidget(deform_btn)
 
         # Separador
@@ -487,10 +506,10 @@ class ImageEditor(QMainWindow):
         toolbar_layout.addWidget(separator1)
 
         # Botones de deshacer/rehacer con atajos de teclado
-        undo_btn = create_tool_button("↩️", "Deshacer (Ctrl+Z)", self.undo)
+        undo_btn = create_tool_button("↩️", self.translator.get_text('undo'), self.undo)
         toolbar_layout.addWidget(undo_btn)
 
-        redo_btn = create_tool_button("↪️", "Rehacer (Ctrl+Y)", self.redo)
+        redo_btn = create_tool_button("↪️", self.translator.get_text('redo'), self.redo)
         toolbar_layout.addWidget(redo_btn)
 
         # Separador
@@ -500,7 +519,7 @@ class ImageEditor(QMainWindow):
         toolbar_layout.addWidget(separator2)
 
         # Botón de reset con atajo de teclado
-        reset_btn = create_tool_button("®️", "Restablecer (T)", self.reset_current_image)
+        reset_btn = create_tool_button("®️", self.translator.get_text('reset'), self.reset_current_image)
         toolbar_layout.addWidget(reset_btn)
 
         # Separador
@@ -510,14 +529,14 @@ class ImageEditor(QMainWindow):
         toolbar_layout.addWidget(separator3)
 
         # Botón para cambiar el tema
-        theme_btn = create_tool_button("🌗", "Tema", self.toggle_theme)
+        theme_btn = create_tool_button("🌗", self.translator.get_text('theme'), self.toggle_theme)
         toolbar_layout.addWidget(theme_btn)
 
         # Añadir espacio al final
         toolbar_layout.addStretch()
 
         # Crear un dock widget para contener la barra de herramientas
-        dock = QDockWidget("Herramientas", self)
+        dock = QDockWidget(self.translator.get_text('tools'), self)
         dock.setWidget(toolbar_widget)
         dock.setFeatures(QDockWidget.NoDockWidgetFeatures)  # No permitir mover/cerrar
         dock.setAllowedAreas(Qt.LeftDockWidgetArea)  # Solo permitir en el lado izquierdo
@@ -563,8 +582,8 @@ class ImageEditor(QMainWindow):
     def load_images(self):
         """Carga imágenes desde archivos."""
         file_paths, _ = QFileDialog.getOpenFileNames(
-            self, "Seleccionar Imágenes", "",
-            "Imágenes (*.png *.jpg *.jpeg *.bmp *.gif *.tiff);;Todos los archivos (*)"
+            self, self.translator.get_text('load_dialog_title'), "",
+            f"{self.translator.get_text('all_images')} (*.png *.jpg *.jpeg *.bmp *.gif *.tiff);;{self.translator.get_text('all_files')} (*)"
         )
 
         if not file_paths:
@@ -576,7 +595,7 @@ class ImageEditor(QMainWindow):
         # Actualizar la galería
         self.update_gallery()
 
-        self.statusBar.showMessage(f"Cargadas {len(file_paths)} imágenes")
+        self.statusBar.showMessage(f"{self.translator.get_text('images_loaded')} {len(file_paths)}")
 
     def update_gallery(self):
         """Actualiza la galería con las imágenes cargadas."""
@@ -620,11 +639,11 @@ class ImageEditor(QMainWindow):
         """Guarda las imágenes editadas."""
         try:
             if not self.loaded_images:
-                QMessageBox.warning(self, "Advertencia", "No hay imágenes para guardar.")
+                QMessageBox.warning(self, self.translator.get_text('warning'), self.translator.get_text('no_images_to_save'))
                 return
 
             # Seleccionar directorio de destino
-            save_dir = QFileDialog.getExistingDirectory(self, "Seleccionar Directorio para Guardar")
+            save_dir = QFileDialog.getExistingDirectory(self, self.translator.get_text('save_directory_title'))
 
             if not save_dir:
                 return
@@ -714,7 +733,7 @@ class ImageEditor(QMainWindow):
         self.marquee_offset += self.marquee_speed
 
         # Buscar todas las etiquetas de texto en los botones de herramientas
-        for button_name, button in self.tool_buttons.items():
+        for button in self.tool_buttons.values():
             # Buscar la etiqueta de texto en el botón
             for child in button.findChildren(QLabel):
                 if child.objectName() == "marquee_text":
@@ -767,6 +786,83 @@ class ImageEditor(QMainWindow):
         # Mostrar mensaje
         theme_name = "Claro" if next_theme == 1 else "Oscuro"
         self.statusBar.showMessage(f"Tema cambiado a: {theme_name}")
+
+    def change_language(self, language):
+        """Cambia el idioma de la interfaz."""
+        if self.translator.set_language(language):
+            # Actualizar el título de la ventana
+            self.setWindowTitle(self.translator.get_text('window_title'))
+
+            # Actualizar los textos de los botones de carga y guardado
+            for widget in self.findChildren(QPushButton):
+                # Obtener el texto actual del botón
+                current_text = widget.text()
+
+                # Comprobar si el texto coincide con alguna de las traducciones
+                if current_text.find("Cargar") >= 0 or current_text.find("Load") >= 0:
+                    widget.setText(self.translator.get_text('load_images'))
+                elif current_text.find("Guardar") >= 0 or current_text.find("Save") >= 0:
+                    widget.setText(self.translator.get_text('save_images'))
+                elif current_text.find("Anterior") >= 0 or current_text.find("Previous") >= 0:
+                    widget.setText(self.translator.get_text('prev_page'))
+                elif current_text.find("Siguiente") >= 0 or current_text.find("Next") >= 0:
+                    widget.setText(self.translator.get_text('next_page'))
+                elif current_text.find("Español") >= 0 or current_text.find("Spanish") >= 0:
+                    widget.setText(self.translator.get_text('spanish'))
+                elif current_text.find("Inglés") >= 0 or current_text.find("English") >= 0:
+                    widget.setText(self.translator.get_text('english'))
+
+            # Actualizar los textos de las etiquetas
+            for widget in self.findChildren(QLabel):
+                current_text = widget.text()
+                if current_text.find("Resolución") >= 0 or current_text.find("Resolution") >= 0:
+                    widget.setText(self.translator.get_text('output_resolution'))
+
+            # Actualizar los textos de los botones de herramientas
+            for button in self.tool_buttons.values():
+                for child in button.findChildren(QLabel):
+                    if child.objectName() == "marquee_text":
+                        current_text = child.text()
+
+                        # Actualizar el texto según el tipo de botón
+                        if current_text.find("Mover") >= 0 or current_text.find("Move") >= 0:
+                            child.setText(self.translator.get_text('move'))
+                            child.original_text = self.translator.get_text('move')
+                        elif current_text.find("Redimensionar") >= 0 or current_text.find("Resize") >= 0:
+                            child.setText(self.translator.get_text('resize'))
+                            child.original_text = self.translator.get_text('resize')
+                        elif current_text.find("Rotar") >= 0 or current_text.find("Rotate") >= 0:
+                            child.setText(self.translator.get_text('rotate'))
+                            child.original_text = self.translator.get_text('rotate')
+                        elif current_text.find("Deformar") >= 0 or current_text.find("Deform") >= 0:
+                            child.setText(self.translator.get_text('deform'))
+                            child.original_text = self.translator.get_text('deform')
+                        elif current_text.find("Deshacer") >= 0 or current_text.find("Undo") >= 0:
+                            child.setText(self.translator.get_text('undo'))
+                            child.original_text = self.translator.get_text('undo')
+                        elif current_text.find("Rehacer") >= 0 or current_text.find("Redo") >= 0:
+                            child.setText(self.translator.get_text('redo'))
+                            child.original_text = self.translator.get_text('redo')
+                        elif current_text.find("Restablecer") >= 0 or current_text.find("Reset") >= 0:
+                            child.setText(self.translator.get_text('reset'))
+                            child.original_text = self.translator.get_text('reset')
+                        elif current_text.find("Tema") >= 0 or current_text.find("Theme") >= 0:
+                            child.setText(self.translator.get_text('theme'))
+                            child.original_text = self.translator.get_text('theme')
+
+            # Actualizar el título del dock
+            for dock in self.findChildren(QDockWidget):
+                current_title = dock.windowTitle()
+                if current_title.find("Herramientas") >= 0 or current_title.find("Tools") >= 0:
+                    dock.setWindowTitle(self.translator.get_text('tools'))
+
+            # Actualizar el mensaje de atajos
+            self.shortcuts_message = self.translator.get_text('shortcuts')
+            self.statusBar.showMessage(self.shortcuts_message, 3000)
+
+            # Mostrar mensaje informativo
+            lang_name = "Español" if language == "es" else "English"
+            self.statusBar.showMessage(f"Idioma cambiado a {lang_name}", 3000)
 
     def set_edit_mode(self, mode):
         """Establece el modo de edición para la vista de imagen actual."""
