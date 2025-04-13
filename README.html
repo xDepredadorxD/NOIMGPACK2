@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Imágenes - Documentación</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #0366d6;
+        }
+        code {
+            background-color: #f6f8fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        pre {
+            background-color: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+        }
+        .image-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image-container img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .feature-item {
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .theme-preview {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .theme-card {
+            flex: 1;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .dark-theme {
+            background-color: #1e1e2e;
+            color: #f8f8f2;
+        }
+        .light-theme {
+            background-color: #ffffff;
+            color: #000000;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Editor de Imágenes</h1>
+    
+    <p>Una aplicación de escritorio para editar imágenes con una interfaz intuitiva y funciones potentes. Permite cargar, editar y guardar imágenes con soporte para múltiples formatos y transparencia.</p>
+
+    <div class="image-container">
+        <!-- Imagen principal de la aplicación -->
+        <img src="URL_IMAGEN_PRINCIPAL" alt="Vista principal del Editor de Imágenes">
+        <p><em>Vista principal del Editor de Imágenes</em></p>
+    </div>
+
+    <h2>Características Principales</h2>
+    
+    <div class="feature-list">
+        <div class="feature-item">
+            <h3>🖼️ Gestión de Imágenes</h3>
+            <ul>
+                <li>Carga múltiples imágenes en formato PNG, JPG, JPEG, BMP</li>
+                <li>Conversión automática a PNG para preservar transparencia</li>
+                <li>Visualización en cuadrícula con múltiples páginas</li>
+                <li>Exportación con resolución personalizada</li>
+            </ul>
+        </div>
+        
+        <div class="feature-item">
+            <h3>🔄️ Herramientas de Edición</h3>
+            <ul>
+                <li>Mover imágenes dentro del área de trabajo</li>
+                <li>Redimensionar manteniendo proporciones</li>
+                <li>Rotar con punto de referencia en el centro</li>
+                <li>Deformar con puntos de control en los vértices</li>
+            </ul>
+        </div>
+        
+        <div class="feature-item">
+            <h3>🧰 Funciones Avanzadas</h3>
+            <ul>
+                <li>Historial de cambios con deshacer/rehacer</li>
+                <li>Zoom con rueda del ratón</li>
+                <li>Navegación con clic central</li>
+                <li>Marcos de selección para edición precisa</li>
+            </ul>
+        </div>
+        
+        <div class="feature-item">
+            <h3>🎨 Personalización</h3>
+            <ul>
+                <li>Dos temas visuales (claro y oscuro)</li>
+                <li>Interfaz con emojis para mejor usabilidad</li>
+                <li>Atajos de teclado configurados</li>
+                <li>Barra de herramientas vertical personalizable</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>Instalación</h2>
+    
+    <h3>Requisitos Previos</h3>
+    <p>Asegúrate de tener instalado Python 3.6 o superior.</p>
+    
+    <h3>Pasos de Instalación</h3>
+    
+    <ol>
+        <li>Clona el repositorio:
+            <pre><code>git clone https://github.com/tu-usuario/editor-imagenes.git
+cd editor-imagenes</code></pre>
+        </li>
+        <li>Instala las dependencias:
+            <pre><code>pip install PyQt5 Pillow</code></pre>
+        </li>
+        <li>Ejecuta la aplicación:
+            <pre><code>python main.py</code></pre>
+        </li>
+    </ol>
+
+    <h2>Guía de Uso</h2>
+    
+    <h3>Interfaz de Usuario</h3>
+    
+    <div class="image-container">
+        <!-- Imagen de la interfaz con anotaciones -->
+        <img src="URL_IMAGEN_INTERFAZ" alt="Interfaz de usuario con anotaciones">
+        <p><em>Interfaz de usuario con anotaciones</em></p>
+    </div>
+    
+    <p>La interfaz se compone de:</p>
+    <ul>
+        <li><strong>Barra de herramientas vertical</strong>: Situada a la izquierda, contiene las herramientas principales de edición.</li>
+        <li><strong>Área de trabajo</strong>: Espacio central donde se muestran y editan las imágenes.</li>
+        <li><strong>Barra superior</strong>: Contiene los botones para cargar y guardar imágenes.</li>
+        <li><strong>Pestañas de páginas</strong>: Permiten navegar entre diferentes páginas de imágenes.</li>
+        <li><strong>Barra de estado</strong>: Muestra información sobre la herramienta actual y atajos de teclado.</li>
+    </ul>
+
+    <h3>Temas Visuales</h3>
+    
+    <p>La aplicación incluye dos temas visuales que puedes alternar con el botón 🌗 o presionando la tecla T:</p>
+    
+    <div class="theme-preview">
+        <div class="theme-card dark-theme">
+            <h4>Tema Oscuro</h4>
+            <ul>
+                <li>Fondo azul marino</li>
+                <li>Botones negros</li>
+                <li>Texto amarillo</li>
+                <li>Bordes redondeados</li>
+            </ul>
+        </div>
+        
+        <div class="theme-card light-theme">
+            <h4>Tema Claro</h4>
+            <ul>
+                <li>Fondo blanco</li>
+                <li>Botones claros</li>
+                <li>Texto negro</li>
+                <li>Bordes redondeados</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="image-container">
+        <!-- Imagen de comparación de temas -->
+        <img src="URL_IMAGEN_TEMAS" alt="Comparación de temas oscuro y claro">
+        <p><em>Comparación de temas oscuro y claro</em></p>
+    </div>
+
+    <h3>Herramientas de Edición</h3>
+    
+    <table>
+        <tr>
+            <th>Herramienta</th>
+            <th>Icono</th>
+            <th>Atajo</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Mover</td>
+            <td>Ⓜ️</td>
+            <td>Q</td>
+            <td>Mueve la imagen dentro del área de trabajo</td>
+        </tr>
+        <tr>
+            <td>Redimensionar</td>
+            <td>🔛</td>
+            <td>W</td>
+            <td>Cambia el tamaño de la imagen manteniendo proporciones</td>
+        </tr>
+        <tr>
+            <td>Rotar</td>
+            <td>🔄️</td>
+            <td>R</td>
+            <td>Rota la imagen con punto de referencia en el centro</td>
+        </tr>
+        <tr>
+            <td>Deformar</td>
+            <td>🆓</td>
+            <td>D</td>
+            <td>Deforma la imagen usando puntos de control en los vértices</td>
+        </tr>
+        <tr>
+            <td>Deshacer</td>
+            <td>↩️</td>
+            <td>Ctrl+Z</td>
+            <td>Deshace la última acción</td>
+        </tr>
+        <tr>
+            <td>Rehacer</td>
+            <td>↪️</td>
+            <td>Ctrl+Y</td>
+            <td>Rehace la última acción deshecha</td>
+        </tr>
+        <tr>
+            <td>Restablecer</td>
+            <td>®️</td>
+            <td>T</td>
+            <td>Restablece la imagen a su estado original</td>
+        </tr>
+        <tr>
+            <td>Cambiar Tema</td>
+            <td>🌗</td>
+            <td>-</td>
+            <td>Alterna entre tema oscuro y claro</td>
+        </tr>
+    </table>
+
+    <h3>Navegación</h3>
+    
+    <ul>
+        <li><strong>Zoom</strong>: Usa la rueda del ratón para acercar o alejar</li>
+        <li><strong>Desplazamiento</strong>: Mantén presionado el botón central del ratón y arrastra para desplazarte por el área de trabajo</li>
+        <li><strong>Selección de imagen</strong>: Haz clic en cualquier imagen para seleccionarla (se resaltará con un borde azul)</li>
+        <li><strong>Cambio de página</strong>: Usa los botones ◀️ Página Anterior y Página Siguiente ▶️ para navegar entre páginas</li>
+    </ul>
+
+    <h3>Carga y Guardado</h3>
+    
+    <div class="image-container">
+        <!-- Imagen del proceso de carga/guardado -->
+        <img src="URL_IMAGEN_CARGA_GUARDADO" alt="Proceso de carga y guardado de imágenes">
+        <p><em>Proceso de carga y guardado de imágenes</em></p>
+    </div>
+    
+    <h4>Carga de Imágenes</h4>
+    <ol>
+        <li>Haz clic en el botón "Cargar Imágenes" en la barra superior</li>
+        <li>Selecciona una o varias imágenes en el diálogo de archivos</li>
+        <li>Las imágenes se cargarán y se mostrarán en el área de trabajo</li>
+        <li>Todas las imágenes se convierten automáticamente a formato PNG para preservar la transparencia</li>
+    </ol>
+    
+    <h4>Guardado de Imágenes</h4>
+    <ol>
+        <li>Haz clic en el botón "Guardar Imágenes" en la barra superior</li>
+        <li>Selecciona una carpeta de destino en el diálogo</li>
+        <li>Todas las imágenes editadas se guardarán en formato PNG con el sufijo "_edited"</li>
+        <li>Los marcos de selección no serán visibles en las imágenes guardadas</li>
+    </ol>
+
+    <h3>Herramienta de Deformación</h3>
+    
+    <div class="image-container">
+        <!-- Imagen de la herramienta de deformación -->
+        <img src="URL_IMAGEN_DEFORMACION" alt="Uso de la herramienta de deformación">
+        <p><em>Uso de la herramienta de deformación</em></p>
+    </div>
+    
+    <p>La herramienta de deformación permite modificar la forma de la imagen mediante puntos de control:</p>
+    <ol>
+        <li>Selecciona la herramienta de deformación (🆓) o presiona D</li>
+        <li>Aparecerán puntos de control en las esquinas de la imagen</li>
+        <li>Arrastra cualquier punto para deformar la imagen</li>
+        <li>Los puntos de control siempre siguen los vértices de la imagen</li>
+    </ol>
+
+    <h2>Funcionalidades Avanzadas</h2>
+    
+    <h3>Historial de Cambios</h3>
+    <p>La aplicación mantiene un historial de todas las modificaciones realizadas a las imágenes, permitiendo:</p>
+    <ul>
+        <li>Deshacer cambios con el botón ↩️ o Ctrl+Z</li>
+        <li>Rehacer cambios con el botón ↪️ o Ctrl+Y</li>
+        <li>Restablecer la imagen a su estado original con el botón ®️ o T</li>
+    </ul>
+    
+    <h3>Exportación con Resolución Personalizada</h3>
+    <p>Al guardar las imágenes, puedes especificar una resolución personalizada:</p>
+    <ol>
+        <li>Haz clic en "Guardar Imágenes"</li>
+        <li>Selecciona la carpeta de destino</li>
+        <li>Las imágenes se guardarán con la resolución actual mostrada en la interfaz</li>
+        <li>La transparencia se preserva en el formato PNG</li>
+    </ol>
+
+    <h2>Solución de Problemas</h2>
+    
+    <h3>Problemas Comunes</h3>
+    <table>
+        <tr>
+            <th>Problema</th>
+            <th>Solución</th>
+        </tr>
+        <tr>
+            <td>La aplicación no inicia</td>
+            <td>Verifica que tienes instaladas todas las dependencias con <code>pip install PyQt5 Pillow</code></td>
+        </tr>
+        <tr>
+            <td>No se pueden cargar imágenes</td>
+            <td>Asegúrate de que las imágenes estén en formato compatible (PNG, JPG, JPEG, BMP)</td>
+        </tr>
+        <tr>
+            <td>Las herramientas no funcionan en todas las imágenes</td>
+            <td>Haz clic en la imagen que deseas editar para seleccionarla (se resaltará con un borde azul)</td>
+        </tr>
+        <tr>
+            <td>La aplicación se cierra inesperadamente</td>
+            <td>Verifica que tienes suficiente memoria RAM disponible, especialmente al trabajar con imágenes grandes</td>
+        </tr>
+    </table>
+
+    <h2>Desarrollo y Contribución</h2>
+    
+    <h3>Estructura del Proyecto</h3>
+    <pre><code>editor-imagenes/
+├── main.py              # Punto de entrada de la aplicación
+├── image_editor.py      # Clase principal del editor
+├── image_view.py        # Clase para visualización y edición de imágenes
+├── README.html          # Documentación (este archivo)
+└── requirements.txt     # Dependencias del proyecto</code></pre>
+
+    <h3>Cómo Contribuir</h3>
+    <ol>
+        <li>Haz un fork del repositorio</li>
+        <li>Crea una rama para tu funcionalidad (<code>git checkout -b feature/nueva-funcionalidad</code>)</li>
+        <li>Realiza tus cambios y haz commit (<code>git commit -am 'Añadir nueva funcionalidad'</code>)</li>
+        <li>Sube los cambios a tu fork (<code>git push origin feature/nueva-funcionalidad</code>)</li>
+        <li>Crea un Pull Request</li>
+    </ol>
+
+    <h2>Licencia</h2>
+    <p>Este proyecto está licenciado bajo la Licencia MIT - ver el archivo LICENSE para más detalles.</p>
+
+    <h2>Contacto</h2>
+    <p>Si tienes preguntas o sugerencias, no dudes en abrir un issue en el repositorio o contactar al desarrollador.</p>
+
+    <footer>
+        <p>© 2023 Editor de Imágenes - Desarrollado con ❤️ usando Python y PyQt5</p>
+    </footer>
+</body>
+</html>
